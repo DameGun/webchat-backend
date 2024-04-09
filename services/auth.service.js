@@ -43,7 +43,7 @@ async function login(user) {
 async function createJwt(user) {
     return jwt.sign(
         {
-            username: user.username,
+            user_name: user.username,
             user_id: user.id
         },
         process.env.JWT_SECRET,

@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { db } from '../config/db.js';
+import Message from './message.model.js';
 
 const User = db.define('user', {
     id: {
@@ -18,8 +19,16 @@ const User = db.define('user', {
         allowNull: false
     }
 }, {
-    tableName: 'user',
+    tableName: 'users',
     timestamps: false
 });
+
+User.hasMany(Message, {
+    foreignKey: 'user_id'
+});
+
+Message.belongsTo(User, {
+    foreignKey: 'user_id'
+})
 
 export default User;
