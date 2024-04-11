@@ -2,6 +2,7 @@ import messageService from "../services/message.service.js";
 
 async function findAll(wsHandler) {
     const messages = await messageService.findAll();
+    
     wsHandler.sendMessage('connection', messages);
 }
 
@@ -11,6 +12,7 @@ function create(wsHandler) {
 
     try {
       const data = await messageService.create(reqMessage);
+
       res.status(201).json(data);
       wsHandler.sendMessage('create', data);
     } catch (err) {
@@ -27,6 +29,8 @@ function update(wsHandler) {
     try {
       await messageService.update(id, reqMessage);
       const data = await messageService.findAll();
+
+      res.status(200).json(data);
       wsHandler.sendMessage('update', data);
     } catch (err) {
       next(err);
@@ -41,6 +45,8 @@ function destroy(wsHandler) {
     try {
       await messageService.destroy(id);
       const data = await messageService.findAll();
+
+      res.status(200);
       wsHandler.sendMessage('destroy', data);
     } catch (err) {
       next(err);

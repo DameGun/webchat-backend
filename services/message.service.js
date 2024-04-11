@@ -1,7 +1,11 @@
 import Message from '../models/message.model.js';
 
 async function findAll() {
-    return await Message.findAll();
+    return await Message.findAll({
+        order: [
+            ['created_at', 'ASC']
+        ]
+    });
 }
 
 async function create(message) {

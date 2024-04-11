@@ -4,7 +4,7 @@ function errorHandlerMiddleware(err, req, res, next) {
       message: err.message || "Something went wrong try again later",
       errors: err.errors,
     };
-  
+    
     return res.status(customError.statusCode).json({
         success: false,
         message: customError.message,
